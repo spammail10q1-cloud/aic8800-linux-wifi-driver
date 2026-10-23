@@ -61,7 +61,8 @@ MAKEFLAGS +=-j$(shell nproc)
 
 all: modules
 modules:
-	make -C $(KDIR) M=$(PWD) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) $(if $(LLVM),LLVM=$(LLVM)) $(if $(LLVM_IAS),LLVM_IAS=$(LLVM_IAS)) $(if $(CC),CC=$(CC)) modules
+	$(MAKE) -C aic_load_fw KVER=$(KVER) KDIR="$(KDIR)" ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) $(if $(LLVM),LLVM=$(LLVM)) $(if $(LLVM_IAS),LLVM_IAS=$(LLVM_IAS)) $(if $(CC),CC=$(CC))
+	$(MAKE) -C aic8800_fdrv KVER=$(KVER) KDIR="$(KDIR)" ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) $(if $(LLVM),LLVM=$(LLVM)) $(if $(LLVM_IAS),LLVM_IAS=$(LLVM_IAS)) $(if $(CC),CC=$(CC))
 
 install:
 	mkdir -p $(MODDESTDIR)
